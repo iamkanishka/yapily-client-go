@@ -1,6 +1,6 @@
 # yapily-client
 
-Go SDK for OBIE (UK Open Banking) APIs.
+Go SDK for Yapily APIs to access financial data and initiate open banking payments across European institutions.
 
 ## Install
 
