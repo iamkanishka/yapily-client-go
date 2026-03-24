@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.8"
+          cache: true
+
+      - name: Verify dependencies
+        run: go mod verify
+
+      - name: Run tests
+        run: go test -v -race ./...
+
+      - name: Build binaries
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "Building version $VERSION"
+
+          GOOS=linux   GOARCH=amd64 go build -ldflags="-X main.version=$VERSION" -o dist/yapily-sdk-linux-amd64   ./examples/basic/
+          GOOS=linux   GOARCH=arm64 go build -ldflags="-X main.version=$VERSION" -o dist/yapily-sdk-linux-arm64   ./examples/basic/
+          GOOS=darwin  GOARCH=amd64 go build -ldflags="-X main.version=$VERSION" -o dist/yapily-sdk-darwin-amd64  ./examples/basic/
+          GOOS=darwin  GOARCH=arm64 go build -ldflags="-X main.version=$VERSION" -o dist/yapily-sdk-darwin-arm64  ./examples/basic/
+          GOOS=windows GOARCH=amd64 go build -ldflags="-X main.version=$VERSION" -o dist/yapily-sdk-windows-amd64.exe ./examples/basic/
+
+      - name: Create checksums
+        run: |
+          cd dist
+          sha256sum * > checksums.txt
+          cat checksums.txt
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-beta') || contains(github.ref, '-alpha') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
