@@ -1,8 +1,8 @@
-# openbanking-go-sdk
+# yapily-client-go
 
-[![CI](https://github.com/yourusername/openbanking-go-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/openbanking-go-sdk/actions/workflows/ci.yml)
-[![Go Reference](https://pkg.go.dev/badge/github.com/yourusername/openbanking-go-sdk.svg)](https://pkg.go.dev/github.com/yourusername/openbanking-go-sdk)
-[![Go Report Card](https://goreportcard.com/badge/github.com/yourusername/openbanking-go-sdk)](https://goreportcard.com/report/github.com/yourusername/openbanking-go-sdk)
+[![CI](https://github.com/iamkanishka/yapily-client-go/actions/workflows/ci.yml/badge.svg)](https://github.com/iamkanishka/yapily-client-go/actions/workflows/ci.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/iamkanishka/yapily-client-go.svg)](https://pkg.go.dev/github.com/iamkanishka/yapily-client-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/iamkanishka/yapily-client-go)](https://goreportcard.com/report/github.com/iamkanishka/yapily-client-go)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](./VERSION)
 
@@ -32,7 +32,7 @@ authorisations, VRP, bulk payments, data enrichment, hosted pages, webhooks, and
 ## Installation
 
 ```bash
-go get github.com/yourusername/openbanking-go-sdk@latest
+go get github.com/iamkanishka/yapily-client-go@latest
 ```
 
 Requires **Go 1.21+**.
@@ -49,8 +49,8 @@ import (
     "fmt"
     "log"
 
-    "github.com/yourusername/openbanking-go-sdk/client"
-    "github.com/yourusername/openbanking-go-sdk/domain"
+    "github.com/iamkanishka/yapily-client-go/client"
+    "github.com/iamkanishka/yapily-client-go/domain"
 )
 
 func main() {
@@ -197,7 +197,7 @@ err = c.Transactions.ListPaginated(ctx, consentToken, accountID, 50,
 
 ### Payments
 ```go
-import "github.com/yourusername/openbanking-go-sdk/utils"
+import "github.com/iamkanishka/yapily-client-go/utils"
 
 payment, err := c.Payments.Create(ctx, consentToken, &domain.PaymentRequest{
     Amount:   100.00,
@@ -305,7 +305,7 @@ secret, err := c.Webhooks.ResetSecret(ctx)
 err          = c.Webhooks.DeleteEvent(ctx, event.EventTypeID)
 
 // Verify incoming webhook signatures
-import "github.com/yourusername/openbanking-go-sdk/middleware"
+import "github.com/iamkanishka/yapily-client-go/middleware"
 err = middleware.VerifyWebhookSignature(body, secret.Secret, r.Header.Get("X-Yapily-Signature"))
 ```
 
@@ -364,7 +364,7 @@ c, err := client.New(appKey, appSecret,
 ## Error Handling
 
 ```go
-import sdkerrors "github.com/yourusername/openbanking-go-sdk/errors"
+import sdkerrors "github.com/iamkanishka/yapily-client-go/errors"
 
 _, err := c.Accounts.List(ctx, consentToken)
 if err != nil {
@@ -424,7 +424,7 @@ git push origin v1.0.0
 ## Project Structure
 
 ```
-openbanking-go-sdk/
+yapily-client-go/
 ├── client/                 # Main entry point — client.New() wires all services
 ├── auth/                   # HTTP Basic Auth provider (+ caching OAuth2 variant)
 ├── transport/http/         # Retry, rate-limit, logging transport
@@ -459,4 +459,4 @@ openbanking-go-sdk/
 
 ## License
 
-[MIT](./LICENSE) © openbanking-go-sdk contributors
+[MIT](./LICENSE) © yapily-client-go contributors
