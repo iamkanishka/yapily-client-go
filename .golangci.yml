@@ -1,0 +1,68 @@
+# golangci-lint configuration for github.com/iamkanishka/yapily
+run:
+  timeout: 5m
+  go: "1.25"
+  modules-download-mode: readonly
+
+linters:
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - gofmt
+    - goimports
+    - misspell
+    - revive
+    - godot
+    - noctx
+    - bodyclose
+    - contextcheck
+    - copyloopvar
+    - gocritic
+
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+
+  revive:
+    rules:
+      - name: exported
+        severity: warning
+      - name: var-naming
+        severity: warning
+
+  godot:
+    scope: declarations
+    capital: false
+
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - performance
+    disabled-checks:
+      - hugeParam
+
+  goimports:
+    local-prefixes: github.com/iamkanishka/yapily
+
+issues:
+  exclude-rules:
+    # godot not enforced in test files
+    - path: _test\.go
+      linters:
+        - godot
+    # domain/models.go has many struct fields — relax revive there
+    - path: domain/models\.go
+      linters:
+        - revive
+    # unused-parameter is common in interface implementations
+    - linters:
+        - revive
+      text: "unused-parameter"
+
+  max-issues-per-linter: 50
+  max-same-issues: 5
