@@ -1,4 +1,4 @@
-# golangci-lint configuration for github.com/iamkanishka/yapily
+# golangci-lint configuration for github.com/iamkanishka/yapily-client-go
 run:
   timeout: 5m
   go: "1.25"
@@ -47,7 +47,7 @@ linters-settings:
       - hugeParam
 
   goimports:
-    local-prefixes: github.com/iamkanishka/yapily
+    local-prefixes: github.com/iamkanishka/yapily-client-go
 
 issues:
   exclude-rules:
