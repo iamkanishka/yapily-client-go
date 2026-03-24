@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the OpenBanking Go SDK are documented here.
+All notable changes to the Yapily Go SDK are documented here.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
@@ -54,8 +54,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-- **Module path** renamed from `github.com/yourusername/openbanking-go-sdk`
-  to `github.com/iamkanishka/yapily` across all 42 Go files and `go.mod`.
+- **Module path** renamed from `github.com/iamkanishka/yapily-client-go`
+  to `github.com/iamkanishka/yapily-client-go` across all 42 Go files and `go.mod`.
 
 ---
 
@@ -120,7 +120,7 @@ Initial stable release. Full coverage of the Yapily API v11.5.x.
 - Context propagation on every HTTP call
 - Structured logging via `go.uber.org/zap`
 - Generic `APIResponse[T]` wrapper — eliminates per-endpoint response structs
-- Full `go.mod` module at `github.com/yourusername/openbanking-go-sdk`
+- Full `go.mod` module at `github.com/iamkanishka/yapily-client-go`
 
 #### Error Types (`errors` package)
 - `APIError` — non-2xx response; fields: `StatusCode`, `Code`, `Message`, `TraceID`
@@ -341,13 +341,13 @@ git push origin main --tags
 
 ```bash
 # Pin to a specific version
-go get github.com/yourusername/openbanking-go-sdk@v1.1.0
+go get github.com/iamkanishka/yapily-client-go@v1.1.0
 
 # Upgrade to latest
-go get github.com/yourusername/openbanking-go-sdk@latest
+go get github.com/iamkanishka/yapily-client-go@latest
 
 # View available versions
-go list -m -versions github.com/yourusername/openbanking-go-sdk
+go list -m -versions github.com/iamkanishka/yapily-client-go
 ```
 
 ---
@@ -366,7 +366,7 @@ go list -m -versions github.com/yourusername/openbanking-go-sdk
 
 ---
 
-[Unreleased]: https://github.com/iamkanishka/yapily/compare/v1.0.2...HEAD
-[1.0.2]: https://github.com/iamkanishka/yapily/compare/v1.0.1...v1.0.2
-[1.0.1]: https://github.com/iamkanishka/yapily/compare/v1.0.0...v1.0.1
-[1.0.0]: https://github.com/iamkanishka/yapily/releases/tag/v1.0.0
+[Unreleased]: https://github.com/iamkanishka/yapily-client-go/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/iamkanishka/yapily-client-go/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/iamkanishka/yapily-client-go/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/iamkanishka/yapily-client-go/releases/tag/v1.0.0
